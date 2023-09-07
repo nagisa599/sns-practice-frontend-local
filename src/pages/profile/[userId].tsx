@@ -1,11 +1,11 @@
 import apiClient from "@/lib/apiClient";
-import { PostType, Profile } from "@/types";
+import { Posttype, Profile } from "@/type";
 import { GetServerSideProps } from "next";
 import React from "react";
 
 type Props = {
   profile: Profile;
-  posts: PostType[];
+  posts: Posttype[];
 };
 
 export const getServerSideProps: GetServerSideProps = async (context: any) => {
@@ -38,7 +38,7 @@ const UserProfile = ({ profile, posts }: Props) => {
             <img
               className="w-20 h-20 rounded-full mr-4"
               alt="User Avatar"
-              src={profile.profileImageUrl}
+              src="{profile.profileImageUrl}"
             />
             <div>
               <h2 className="text-2xl font-semibold mb-1">
@@ -48,14 +48,14 @@ const UserProfile = ({ profile, posts }: Props) => {
             </div>
           </div>
         </div>
-        {posts.map((post: PostType) => (
+        {posts.map((post: Posttype) => (
           <div className="bg-white shadow-md rounded p-4 mb-4" key={post.id}>
             <div className="mb-4">
               <div className="flex items-center mb-2">
                 <img
                   className="w-10 h-10 rounded-full mr-2"
                   alt="User Avatar"
-                  src={profile.profileImageUrl}
+                  src="{profile.profileImageUrl}"
                 />
                 <div>
                   <h2 className="font-semibold text-md">
