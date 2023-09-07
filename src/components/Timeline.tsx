@@ -1,7 +1,7 @@
 import React ,{useState,useEffect}from 'react'
 import Post from './Post'
 import backendapi from '@/lib/apiClient';
-import { Posttype } from '@/styles/type';
+import { Posttype } from '@/type';
 
 const Timeline = () => {
   const [posttext,setPosttext]=useState<string>("");
