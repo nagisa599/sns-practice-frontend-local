@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import Head from 'next/head'
 import backendapi from '@/lib/apiClient';
 import { useRouter } from 'next/router';
-import { useAuth } from './context/auth';
+import { useAuth } from '../context/auth';
 
 
 const Login = () => {

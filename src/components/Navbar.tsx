@@ -1,6 +1,6 @@
 import React from 'react'
 import Link from 'next/link'
-import { useAuth } from '@/pages/context/auth'
+import { useAuth } from '@/context/auth'
 const Navbar = () => {
   const {user,logout} = useAuth();
   console.log(user);
