@@ -16,7 +16,7 @@ const Post = (props:Props) => {
       <Link href={`/profile/${post.authorId}`}>
       <img
         className="w-10 h-10 rounded-full mr-2"
-        src={post.author.profile?.profileImageUrl}
+        src="{post.author.profile?.profileImageUrl}"
         alt="User Avatar"
       />
       </Link>
