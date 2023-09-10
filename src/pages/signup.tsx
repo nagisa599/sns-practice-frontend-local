@@ -14,11 +14,11 @@ const register = async (e:React.FormEvent<HTMLFormElement>)=>{ //新規登録を
   e.preventDefault();
   try{
     await backendapi.post("auth/register",{ //auth/registerへアクセス　データベースへのアクセスのため非同期処理　await asyncを付ける
-      username:name,email:email,password:password
+      username:name,email:email,password:password//第2引数には、渡したい引数。
     })
-    router.push("/login");
+    router.push("/login");//エラーが発生しなかったらloginページに飛ばす。
   }catch(err){
-    alert("入力が正しくありません")
+    alert("入力が正しくありません");
   }
 }
 

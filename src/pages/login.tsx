@@ -20,12 +20,15 @@ const Login = () => {
         email:email,password:password
       }
       );
-      const token = res.data.token;
-      login(token);
+      const token = res.data.token;//成功したらtokenを取り出す。
+      login(token);//loginメソッドを使う
       router.push("/");
     
-    }catch(err){
-      alert("入力が正しくありません")
+    }catch(error:any){
+      const err =error.response.data;
+      //console.log(err);
+
+     
     }
   }
   return (

@@ -4,20 +4,20 @@ import backendapi from '@/lib/apiClient';
 import { Posttype } from '@/type';
 
 const Timeline = () => {
-  const [posttext,setPosttext]=useState<string>("");
-  const [latestPost,setLatestPosts]=useState<Posttype[]>([]);
+  const [posttext,setPosttext]=useState<string>("");//投稿するためのuseState
+  const [latestPost,setLatestPosts]=useState<Posttype[]>([]);//最新の投稿１０件を得るためのuseState
 
-  const userposthandler = async (e:React.FormEvent<HTMLFormElement>)=>{ //新規登録をするためにapiを投げる //formに着けるものは、この型になる。
+  const userposthandler = async (e:React.FormEvent<HTMLFormElement>)=>{ //投稿をpostするためにapiを投げる //formに着けるものは、この型になる。
     e.preventDefault();
     try{
       
-      const res = await backendapi.post("posts/post",{ //
+      const res = await backendapi.post("posts/post",{ 
         content:posttext,
       }
       );
       
-      setLatestPosts((prevPost)=>[res.data,...prevPost]);
-      setPosttext("");
+      setLatestPosts((prevPost)=>[res.data,...prevPost]);//prePostには、以前のデータが格納されている。これにred.dataを返す。
+      setPosttext("");//投稿したらnull
 
     
     }catch(err){
@@ -25,7 +25,7 @@ const Timeline = () => {
     }
   };
 
-  useEffect(()=>{
+  useEffect(()=>{//最初に更新した時に多くて10件の最新のデータを持っていく。
    
     const fetctLatest = async() =>{
       try{
@@ -48,6 +48,7 @@ const Timeline = () => {
     <div className="bg-white shadow-md rounded p-4 mb-4">
       <form onSubmit={userposthandler}>
         <textarea
+          value={posttext}
           className="w-full h-24 p-2 border border-gray-300 rounded resize-none focus:outline-none focus:ring-2 focus:ring-blue-400"
           placeholder="What's on your mind?"
           onChange={(e:React.ChangeEvent<HTMLTextAreaElement>)=>{
@@ -62,8 +63,8 @@ const Timeline = () => {
         </button>
       </form>
     </div>
-    {latestPost.map((post:Posttype)=>(
-      <Post key={post.id} post={post} />
+    {latestPost.map((post:Posttype)=>(//mapを使いたいけど、型の指定を忘れない
+      <Post key={post.id} post={post} /> //keyをつけることとpostを忘れない
     ))}
   </main>
 </div>

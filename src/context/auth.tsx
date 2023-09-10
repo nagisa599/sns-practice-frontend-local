@@ -33,8 +33,8 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {//login関数�
     username: string;
   }>(null);
 
-  useEffect(() => {//最初にリロードしたとき
-    const token = localStorage.getItem("auth_token");//
+  useEffect(() => {//最初にリロードしたとき//loginの時と処理はほぼ一緒
+    const token = localStorage.getItem("auth_token");
     if (token) {
       backendapi.defaults.headers["Authorization"] = `Bearer ${token}`;
 
@@ -51,12 +51,14 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {//login関数�
   }, []);
 
   const login = async (token: string) => {//loginの実際のコード
+    //console.log("auth_token");
     localStorage.setItem("auth_token", token);//localsatorageにauth_tokenといった名前のtokenを入れる
-    backendapi.defaults.headers["Authorization"] = `Bearer ${token}`;
+    
+    backendapi.defaults.headers["Authorization"] = `Bearer ${token}`;//loginしたらapiaClientに//"Authorization":`Beare {token}`を追加
 
     try {
       backendapi.get("/users/find").then((res) => {
-        setUser(res.data.user);
+        setUser(res.data.user);//user情報が返ってくるのでuseStateで定義したものに入れる
       });
     } catch (err) {
       console.log(err);
@@ -65,7 +67,7 @@ export const AuthProvider = ({ children }: AuthProviderProps) => {//login関数�
 
   const logout = () => {
     localStorage.removeItem("auth_token");//localsttorageにauth_tokenを消す
-    delete backendapi.defaults.headers["Authorication"];
+    delete backendapi.defaults.headers["Authorication"];//loginしたらapiaClientに//"Authorization":`Beare {token}`を消去
     setUser(null);
   };
 
